@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 # Based on StackOverflow question "Fourier Transform of Sine Waves with Unexpected Results"
 # https://stackoverflow.com/questions/36293721/fourier-transform-of-sine-waves-with-unexpected-results
 
-def sine(freq, time_interval, rate, amp=1, debug=False):
+def gen_sines(freq, time_interval, rate, amp=1, debug=False):
   w = 2. * np.pi * freq
   t = np.linspace(0, time_interval, time_interval*rate)
   y = amp*np.sin(w * t)
@@ -17,6 +17,8 @@ def sine(freq, time_interval, rate, amp=1, debug=False):
 
 def gen_signals(secs,Fs, debug=False):
   # frequency, duration, sampling rate, amplitude
+  # Frequencies must be in terms of the duration
+  # in order for the FFT to only have 1 spike
   f1 = 1/secs
   f2 = 100*secs
   a1=10
@@ -28,8 +30,8 @@ def gen_signals(secs,Fs, debug=False):
   print("f2 is {}".format(f2))
   print("a1 is {}".format(a1))
   print("a2 is {}".format(a2))
-  y1 = sine(f1, secs, Fs, 10, debug)
-  y2 = sine(f2, secs, Fs, 15, debug)
+  y1 = gen_sines(f1, secs, Fs, 10, debug)
+  y2 = gen_sines(f2, secs, Fs, 15, debug)
   y3 = y1 + y2
   signals = [y1, y2, y3]
   return signals
