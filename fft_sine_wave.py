@@ -12,15 +12,13 @@ def sine(freq, time_interval, rate, amp=1):
   y = amp*np.sin(w * t)
   return y
 
-def buildData():
-  secs = 3
-  Fs = 44100
+def buildData(secs,Fs):
   # frequency, duration, sampling rate, amplitude
   y1 = sine(0.5, secs, Fs, 10)
   y2 = sine(5, secs, Fs, 15)
   y3 = y1 + y2
   signals = [y1, y2, y3]
-  showSignals(signals, Fs, secs)
+  return signals
 
 def showSignals(signals, fs, secs):
   nrSigs = len(signals)
@@ -53,4 +51,8 @@ def showSignals(signals, fs, secs):
     ax2.stem(freqs, amps, use_line_collection=True)
   plt.show()
 
-buildData()
+if __name__ == '__main__':
+  secs = 3
+  Fs = 44100
+  signals = buildData(secs, Fs)
+  showSignals(signals, Fs, secs)
