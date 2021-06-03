@@ -19,8 +19,8 @@ def gen_signals(secs,Fs, debug=False):
   # frequency, duration, sampling rate, amplitude
   # Frequencies must be in terms of the duration
   # in order for the FFT to only have 1 spike
-  f1 = 1/secs
-  f2 = 100*secs
+  f1 = 0.5#1/secs
+  f2 = 5#100*secs
   a1=10
   a2=15
   print("Fs is {}".format(Fs))
@@ -38,7 +38,7 @@ def gen_signals(secs,Fs, debug=False):
 
 def plot_signals(signals, fs, secs, debug=False):
   nrSigs = len(signals)
-  fig = plt.figure()
+  fig = plt.figure(figsize=(12,9))
   fig.subplots_adjust(hspace=.5)
   for i in range(len(signals)):
     cols=2
@@ -70,8 +70,8 @@ def plot_signals(signals, fs, secs, debug=False):
   plt.show()
 
 if __name__ == '__main__':
-  secs = 10
-  Fs = 10000
+  secs = 3
+  Fs = 44100
   debug = True
   signals = gen_signals(secs, Fs, debug)
   plot_signals(signals, Fs, secs, debug)
